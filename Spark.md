@@ -8,8 +8,15 @@
 A df is a distributed collection of data grouped into named columns
 - A __schema__ defines the columns names and types of a DataFrame;
 - __DataFrame transformations__: are methods that return a new DataFrame and are lazily evaluated. Select, where, and orderBY are examples of transformations;
-- Because each of these return a DataFrame, we are able to chain these methods together to build new DataFrames.
+  - Because each of these return a DataFrame, we are able to chain these methods together to build new DataFrames.
 - __Actions:__ are methods that trigger computation. Below some examples:
   - Count returns the number of records in a DataFrame, collect returns an array o all rows in a DataFrame, and show displays the top few rows of a DataFrame;
   - These operations require Spark to execute computations to return the expected result.
 - __Lazy Evaluation__ dataFrame transformations are not evaluated until an action is called
+#### Spark Session
+- The first step of any Spark App. It enables you to run Spark Code;
+- Class provides the single entry point to all functionality in Spark using DataFrame API;
+- This is automatically created for you in a Databricks notebook as the variable, spark.
+  - Sql, table, read, range are all ways of using SparkSession to create a DataFrame.
+
+
