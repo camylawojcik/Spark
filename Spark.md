@@ -13,6 +13,8 @@ A df is a distributed collection of data grouped into named columns
   - Count returns the number of records in a DataFrame, collect returns an array o all rows in a DataFrame, and show displays the top few rows of a DataFrame;
   - These operations require Spark to execute computations to return the expected result.
 - __Lazy Evaluation__ dataFrame transformations are not evaluated until an action is called
+- __DataFrameReader__ is accessible through the SparkSession method read. This class includes methods to load DataFrames from different external storage systems.
+- __DataFrameWriter__ is accessible through the sparkSession method write. This class includes methods to write Dataframes from different external storage systems.
 #### Spark Session
 - The first step of any Spark App. It enables you to run Spark Code;
 - Class provides the single entry point to all functionality in Spark using DataFrame API;
@@ -26,6 +28,6 @@ __Spark SQL__ is a module used for structured data processing.
 
 __DataFrame__ is a distributed collection of data grouped into named columns. 
 __Schema__ defines the column names and types of a DataFrame.
-__Transformations__ are methods that return a new DataFrame and are lazily evaluated. Select, where, and orderBy are examples of transformations. Becasuse each of theses return a DataFrame, we are able to chain these methods together to build new DataFrames.
+
 
 
