@@ -19,4 +19,9 @@ A df is a distributed collection of data grouped into named columns
 - This is automatically created for you in a Databricks notebook as the variable, spark.
   - Sql, table, read, range are all ways of using SparkSession to create a DataFrame.
 
+__Spark SQL__ is a module used for structured data processing. 
+- We can interact with Spark SQL by using the DataFrame API, available in Scala, Java, Python and R.
+- You can use any interface, the SparkSQL engine will generate the same query plan.
+- With the additional information Spark SQL provides on data structure and computations being performed, Spark is able to make optimizations before these computations.
+
 
