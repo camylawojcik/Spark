@@ -24,4 +24,8 @@ __Spark SQL__ is a module used for structured data processing.
 - You can use any interface, the SparkSQL engine will generate the same query plan.
 - With the additional information Spark SQL provides on data structure and computations being performed, Spark is able to make optimizations before these computations.
 
+__DataFrame__ is a distributed collection of data grouped into named columns. 
+__Schema__ defines the column names and types of a DataFrame.
+__Transformations__ are methods that return a new DataFrame and are lazily evaluated. Select, where, and orderBy are examples of transformations. Becasuse each of theses return a DataFrame, we are able to chain these methods together to build new DataFrames.
+
 
