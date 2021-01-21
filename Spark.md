@@ -69,3 +69,66 @@ Contains a set of instructions that are used to materialize and transform  the d
   - Worker node: just nodes that do the spark has a master worker architectures; Could have one or many executors.
   - Executors: is in charge of reading and writing from and to data sources and stores comptetition results in either memory or disk. Executors are created and registered whitihn the driver program and additional executors can be requested when needed .
   - Tasks: bite sized units of work that spark driver sent for execution
+- __DataFrame__: just like an RDD is an immutable distributed set of data, but with the advantage that it organizes data in named columns just like a database. Data Frame also exposes an intuitive and easy-to-understand domain-specific language (DSL), that lets Spark developers think in a SQL-oriented way and work with their data. 
+- __Dataset__: which basically corresponds to a strong type abstraction and in version 2 the dataset and the DataFrame APIS have been merged into one, making it much easier to work with spark. The DataFrame Api basically became an untyped dataset, namely dataset of type row and DataFrame is what we leverage when we use Spark SQL and in the same way as in RDDs, the Spark team puts a large effort in providing compatibility or an upgrade path when new versions are released.
+
+__Datasets__ are newer, so they should be much better, therefore I should dump __DataFrames and RDDs__? Not quiet. First of all, __DataFrames__ are one special case of __Datasets__, so if you use a DataFrame, you're using the dataset API. Second, the __Dataset API__ is great work with, but some cases there might be something that you want to achieve and you may need an __RDD__. 
+
+#### RDD or Dataset/DataFrame?
+  - __Rdd__: 
+    - Unstructured data;
+    - Data manipulation with lambdas;
+    - Low level transformations;
+    - Functional;
+    - __Optimization__
+      - Bundle together multiple tasks into stages and pipelining.
+    
+  - __Dataset/DataFrame__: 
+    - Structured or semi Structured data;
+    - much easier to understand;
+    - Equivalent to database table, but better;
+    - Leverage optimizations
+    - Relational style of programming;
+    - Datasets have types
+    Se você está começando, é mais facil usar DataFrames, especialmente se você conhece SQL 
+
+#### Optimization
+  - __Catalyst Optimizer__ is a framework that is part of __Spark SQL__.
+    - It optimize queries 
+      -  Objectives:
+        - Allow easily add new optimization techniques
+        - Enable external developers to extend it 
+    - How it works:
+      - Starts analyzing the queries;
+      - Creates an unresolved logical plan ;
+      - Looks at the catalog and resolves the references;
+      - Creates an optimized logical plan (the cost-based optimization takes place and multiple plans are created and their costs are computed, selecting the best one, which is then converted into several physical plans and one is selected and we get an optimized physical plan);
+      - Optimized code generation: the optimized code is generated, namely Java bytecode that will run in each worker node. 
+  - __Project Tungsten__ another component that aims directly at :
+    - Push the boundaries of performance
+    - Optimize for CPU and memory efficiency: mainly because these are the areas that are not growing at the same rate as others, like storage and network latency;
+    - Focuses on hardware where Spark runs;
+    - __The main optimization features are__ to optimizes data representation in memory, providing an optimized way of storing objects in memory, specifically for Spark's requirements. 
+    - Which allows for __managing memory explicitly__ in a more efficient way.
+    - Cache aware computation
+    - Whole-stage Code Generation: Spark can compile to bytecode several expression together instead of having to evaluate one by one each expression. This one of the improvements that allow you to gain an order of magnitude increase in performance for Spark.
+    
+#### SparkContext and SparkSession
+__SparkContext__ we can say that is the Spark Application (RDD)
+  - Located in the Spark Driver
+  - Entry point for RDDs
+  - The Spark Application: 
+    - One SparkContext per application
+    - There is an option for multiple contexts, but it's used mostly for testing and use of it is discouraged. The context is _created for you in the REPL_, but _you need to create for spark2-subimit_ for subimitting applications.
+__SparkSession__: is the main _entry point for work with sparkSQL_ (DataFrames)
+  - Merges SQLContext and HiveContext into one object 
+  - let's you access the SparkContext
+  - You can have multiple SparkSession objects
+  - Created for you in REPL;
+  - You need to create for spark2-submit
+  
+#### Spark Configuration
+  
+  
+    
+    - 
