@@ -137,4 +137,6 @@ __SparkSession__: is the main _entry point for work with sparkSQL_ (DataFrames)
     - Application (in code) (__have the highest precedence__)
     - You can check in the spark UI or from command line
 spark2-shell --name "Super spark shell" --conf "spark.eventLog.dir=/stackexchange
-    
+
+  - __YARN__  Yet Another Resource Negotiator
+    - Cluster management technology that came to life as well as called Hadoop Next Generation or Hadoop 2
