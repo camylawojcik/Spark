@@ -128,7 +128,13 @@ __SparkSession__: is the main _entry point for work with sparkSQL_ (DataFrames)
   - You need to create for spark2-submit
   
 #### Spark Configuration
-  
-  
+  - Properties: Application parameters
+  - Environment Vars: per machine settings]
+  - Logging: in log4j.properties
+  - __Configuration Precedence__
+    - spark-defaults.conf
+    - passing flags to spark2-submit/spaark2-shell (overwrite those in spark-defaults)
+    - Application (in code) (__have the highest precedence__)
+    - You can check in the spark UI or from command line
+spark2-shell --name "Super spark shell" --conf "spark.eventLog.dir=/stackexchange
     
-    - 
