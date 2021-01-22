@@ -144,4 +144,7 @@ spark2-shell --name "Super spark shell" --conf "spark.eventLog.dir=/stackexchang
       - Resource Manager: é o master node
       - Node Manager: cada worker node tem um NodeManager
       Driver program comunica o resourceManager sobre o job, e ele vai negociar e determinar qual workernode irá startar o container. Esse node terá o __application Master__, e a partir dele o Resource Manager irá prover informações de onde existem recursos disponiveis para o trabalho, e então o __applicationManager__ vai se comunicar com os outros __nodeManager__ que possuem recursos disponiveis e os containers serão criados. Eles são chamados de __Spark Executors__, registrados no __ApplicationMaster__ e performando a tarefa que recebem do Spark Driver. __Dinamyc Allocation__: quando novos executors são requisitados para tarefa e são devolvidos após o termino. FIFO, First Schedule.
-     
+
+### RDD
+__SparkContext__ we can say that is the Spark Application (RDD)
+__SparkSession__: is the main _entry point for work with sparkSQL_ (DataFrames)
