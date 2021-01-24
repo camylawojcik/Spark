@@ -143,8 +143,60 @@ spark2-shell --name "Super spark shell" --conf "spark.eventLog.dir=/stackexchang
     - __Components__:
       - Resource Manager: é o master node
       - Node Manager: cada worker node tem um NodeManager
-      Driver program comunica o resourceManager sobre o job, e ele vai negociar e determinar qual workernode irá startar o container. Esse node terá o __application Master__, e a partir dele o Resource Manager irá prover informações de onde existem recursos disponiveis para o trabalho, e então o __applicationManager__ vai se comunicar com os outros __nodeManager__ que possuem recursos disponiveis e os containers serão criados. Eles são chamados de __Spark Executors__, registrados no __ApplicationMaster__ e performando a tarefa que recebem do Spark Driver. __Dinamyc Allocation__: quando novos executors são requisitados para tarefa e são devolvidos após o termino. FIFO, First Schedule.
+      Driver program comunica o resourceManager sobre o job, e ele vai negocia? e determinar qual workernode irá startar o container. Esse node terá o __application Master__, e a partir dele o Resource Manager irá prover informações de onde existem recursos disponiveis para o trabalho, e então o __applicationManager__ vai se comunicar com os outros __nodeManager__ que possuem recursos disponiveis e os containers serão criados. Eles são chamados de __Spark Executors__, registrados no __ApplicationMaster__ e performando a tarefa que recebem do Spark Driver. __Dinamyc Allocation__: quando novos executors são requisitados para tarefa e são devolvidos após o termino. FIFO, First Schedule.
 
 ### RDD
 __SparkContext__ we can say that is the Spark Application (RDD)
+  - It serves as the master
+  - It provides and lets you configure all necessary parameters regarding your application's configuration and environment and sets up all the internal services required for your app to run.
+  - provides the methods to help you create RDDs to start transformations to your data;
+__ 5 Properties of an RDD__
+  - Partitions: quais são as que formam o rdd?
+  - Dependencies: qual é o parent RDD que este RDD depende?
+  - Functions to compute partition: quais são as funões aplicadas para computar a partição?
+  - Partitioner (key/value RDDs): which tells which partitioner is used to compute a partition for any RDD that's in the form of key value pair.
+  - Preferred locations for compute: can specify where the partition should live.
+__Pair RDD__: data is arranged in a key value pair, each entry is a tuple; useful for grouping or aggregating; can use RDD transformations; there are specialized transformations available; 
+__Creating RDD__: 
+  - Parallelize: will create an RDD in memory from data that you provide or that you specify;
+  - External Data: you might store your data in HDFS, a local file system, or S3, reading your data is usually one of the ways which you start processing it and third from another RDD;
+  - From another RDD: dataset or dataframe
+#### Funções
+  - Repartitions: can be used to specifythe new number of partitions; ncrease or decrease
+  - Coalesce: only decrease
+  
 __SparkSession__: is the main _entry point for work with sparkSQL_ (DataFrames)
+
+#### Actions:
+They indicates to Spark that it is time to start processing 
+
+#### Partitions:
+Is a bunch of data, just a logical grouping 
+  - One of the foundations of parallelism 
+  - Faster to operate whithin partition
+  - Group data to minimize network traffic
+  Data Locality:
+    - when running in YARN it will read in from HDFS blocks when possible, next to the executors;
+    - Spark determine its resources and create partitions based on how many executors it has available. 
+    - You can drive this via configuration or parameters;
+    Spark determines how to shuffle the data using a partitioner
+    - For example: it can use a hash partitioner or range partitioner to specify which element should go.
+    Repartition: you can specify
+  __More or less partitions?__
+    - More partitions = less data per partitions
+      - smaller jobs
+      - More parallelism
+      Ok if you have more worker nodes and ther overload to start a job is not a large part of the work that it takes for each task
+    - Less partitions= more data per partitions
+      - larger jobs
+      - totally fine if larger chunks of data can be processed efficiently with the worker nodes that you have available
+#### Going Deeper
+  - ReduceByKey: a operação é executada localmente, ou seja, menos dados são embaralhados
+  - groupByKey: usar com cuidado
+  - aggregateByKey
+  -__Histogram__ helps when performing statistical data exploration. (It's a diagram consisting of rectangles whose area is proportional to the frequency of a variable and whose width i equal to the class interval). Helps understand the meaning of the data. (Graphic tool) 
+  - __Cache__ you can persist in disk, memory or both; specially usefuk for reusing results from complex calculations or where a lot of shiffling is required.
+  
+  - combineByKey:
+      
+    
